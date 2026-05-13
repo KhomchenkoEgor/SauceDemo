@@ -5,11 +5,10 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.Select;
 
-
 import java.util.List;
 import java.util.stream.Collectors;
 
-public  class ProductsPage extends BasePage{
+public class ProductsPage extends BasePage {
 
     private final By TITLE_PRODUCTS = By.cssSelector("[data-test = title]");
     private final By CART = By.cssSelector("[data-test = shopping-cart-link]");
@@ -55,6 +54,7 @@ public  class ProductsPage extends BasePage{
         Select dropdown = new Select(driver.findElement(SORT_DROPDOWN));
         dropdown.selectByValue(value);
     }
+
     public List<String> getProductNames() {
         return driver.findElements(PRODUCT_NAMES).stream()
                 .map(WebElement::getText)

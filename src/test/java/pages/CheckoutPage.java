@@ -3,7 +3,7 @@ package pages;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
-public class CheckoutPage extends BasePage{
+public class CheckoutPage extends BasePage {
 
     private final By FIRST_NAME_FIELD = By.id("first-name");
     private final By LAST_NAME_FIELD = By.id("last-name");
@@ -18,13 +18,13 @@ public class CheckoutPage extends BasePage{
         super(driver);
     }
 
-    public void checkout(String firstName, String lastName, String zipPostalCode){
+    public void checkout(String firstName, String lastName, String zipPostalCode) {
         driver.findElement(FIRST_NAME_FIELD).sendKeys(firstName);
         driver.findElement(LAST_NAME_FIELD).sendKeys(lastName);
         driver.findElement(ZIP_POSTAL_FIELD).sendKeys(zipPostalCode);
     }
 
-    public String getErrorMessage(){
+    public String getErrorMessage() {
         return driver.findElement(ERROR_MESSAGE).getText();
     }
 
@@ -36,7 +36,7 @@ public class CheckoutPage extends BasePage{
         driver.findElement(FINISH_BUTTON).click();
     }
 
-    public String getCompletedMessage(){
+    public String getCompletedMessage() {
         return driver.findElement(COMPLETE_MESSAGE).getText();
     }
 

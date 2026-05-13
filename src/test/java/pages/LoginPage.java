@@ -2,10 +2,10 @@ package pages;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.support.ui.ExpectedCondition;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 
 public class LoginPage extends BasePage {
-
-
 
     private final By USERNAME_FIELD = By.id("user-name");
     private final By PASSWORD_FIELD = By.id("password");
@@ -16,20 +16,21 @@ public class LoginPage extends BasePage {
         super(driver);
     }
 
-    public void open(){
-        driver.get("https://www.saucedemo.com/");
+    public void open() {
+        driver.get(BASE_URL);
     }
 
-    public void login(String user, String password){
+    public void isPageOpened() {
+        wait.until(ExpectedConditions.visibilityOfElementLocated(LOGIN_BUTTON));
+    }
+
+    public void login(String user, String password) {
         driver.findElement(USERNAME_FIELD).sendKeys(user);
         driver.findElement(PASSWORD_FIELD).sendKeys(password);
         driver.findElement(LOGIN_BUTTON).click();
     }
 
-    public String getErrorMessage(){
+    public String getErrorMessage() {
         return driver.findElement(ERROR_MESSAGE).getText();
     }
-
-
-
 }
