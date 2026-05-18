@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite thread-count="3"
+       name="SauceDemo cross browser suite"
+       parallel="tests">
+
+    <listeners>
+        <listener class-name="tests.TestListener"/>
+        <listener class-name="tests.RetryListener"/>
+    </listeners>
+
+    <test name="Chrome">
+        <parameter name="browser" value="chrome"/>
+        <packages>
+            <package name="tests"/>
+        </packages>
+    </test>
+
+    <test name="Firefox">
+        <parameter name="browser" value="firefox"/>
+        <packages>
+            <package name="tests"/>
+        </packages>
+    </test>
+
+    <test name="Edge">
+        <parameter name="browser" value="edge"/>
+        <packages>
+            <package name="tests"/>
+        </packages>
+    </test>
+</suite>

@@ -4,10 +4,15 @@ import org.testng.Assert;
 
 import org.testng.annotations.Test;
 
+import static org.testng.Assert.assertEquals;
+
 
 public class CartTest extends BaseTest {
 
-    @Test
+    @Test(
+            testName = "Добавление в корзину и переход",
+            description = "Проверка успешного перехода в корзину после добавления товаров",
+            groups = {"smoke", "regression"})
     public void checkCart() {
 
         loginPage.open();
@@ -15,6 +20,6 @@ public class CartTest extends BaseTest {
         productsPage.addToCart("Sauce Labs Backpack");
         productsPage.addToCart("Test.allTheThings() T-Shirt (Red)");
         productsPage.clickCart();
-        Assert.assertEquals(cartPage.getTitle(), "Your Cart", "OK");
+        assertEquals(cartPage.getTitle(), "Your Cart", "OK");
     }
 }
