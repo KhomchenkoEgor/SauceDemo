@@ -8,9 +8,14 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+import static org.testng.Assert.assertEquals;
+
 public class ProductSortTest extends BaseTest {
 
-    @Test
+    @Test(
+            testName = "Сортировка по имени Z-A",
+            description = "Проверка алфавитной сортировки товаров в обратном порядке",
+            groups = {"regression"})
     public void checkSortZA() {
         loginPage.open();
         loginPage.login("standard_user", "secret_sauce");
@@ -21,10 +26,13 @@ public class ProductSortTest extends BaseTest {
         List<String> expectedNames = new ArrayList<>(actualNames);
         expectedNames.sort(Collections.reverseOrder());
         // 4. Сравниваем
-        Assert.assertEquals(actualNames, expectedNames, "Сортировка (Z to A) неверна!");
+        assertEquals(actualNames, expectedNames, "Сортировка (Z to A) неверна!");
     }
 
-    @Test
+    @Test(
+            testName = "Сортировка цен Low to High",
+            description = "Проверка сортировки стоимости товаров от меньшей к большей",
+            groups = {"regression"})
     public void checkPriceSortLowToHigh() {
         loginPage.open();
         loginPage.login("standard_user", "secret_sauce");
@@ -36,6 +44,6 @@ public class ProductSortTest extends BaseTest {
         List<Double> expectedPrices = new ArrayList<>(actualPrices);
         Collections.sort(expectedPrices);
         // 4. Сравниваем списки
-        Assert.assertEquals(actualPrices, expectedPrices, "Цены отсортированы неверно!");
+        assertEquals(actualPrices, expectedPrices, "Цены отсортированы неверно!");
     }
 }
