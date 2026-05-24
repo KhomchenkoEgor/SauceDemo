@@ -1,6 +1,7 @@
 package tests;
 
 
+import io.qameta.allure.*;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
@@ -12,10 +13,15 @@ import static org.testng.Assert.assertEquals;
 
 public class ProductSortTest extends BaseTest {
 
+    @Epic("Sauce Demo 2")
+    @Feature("Каталог и цены")
+    @Owner("Khomchenko E.S.")
     @Test(
             testName = "Сортировка по имени Z-A",
             description = "Проверка алфавитной сортировки товаров в обратном порядке",
             groups = {"regression"})
+    @Story("Сортировка товаров в каталоге")
+    @Severity(SeverityLevel.NORMAL)
     public void checkSortZA() {
         loginPage.open();
         loginPage.login("standard_user", "secret_sauce");
@@ -33,6 +39,8 @@ public class ProductSortTest extends BaseTest {
             testName = "Сортировка цен Low to High",
             description = "Проверка сортировки стоимости товаров от меньшей к большей",
             groups = {"regression"})
+    @Story("Сортировка товаров в каталоге")
+    @Severity(SeverityLevel.NORMAL)
     public void checkPriceSortLowToHigh() {
         loginPage.open();
         loginPage.login("standard_user", "secret_sauce");

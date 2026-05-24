@@ -1,5 +1,6 @@
 package pages;
 
+import io.qameta.allure.Step;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -33,6 +34,7 @@ public class ProductsPage extends BasePage {
         return driver.findElement(TITLE_PRODUCTS).getText();
     }
 
+    @Step("Добавление в корзину товара с именем: '{product}'")
     public void addToCart(String product) {
         driver.findElement(By.xpath(String.format(ADD_TO_CART_PATTERN, product))).click();
     }
@@ -50,17 +52,20 @@ public class ProductsPage extends BasePage {
         driver.findElement(CART).click();
     }
 
+    @Step("Выбрать опцию сортировки товаров в каталоге: '{value}'")
     public void selectSortOption(String value) {
         Select dropdown = new Select(driver.findElement(SORT_DROPDOWN));
         dropdown.selectByValue(value);
     }
 
+    @Step("Получить список имен всех товаров на странице")
     public List<String> getProductNames() {
         return driver.findElements(PRODUCT_NAMES).stream()
                 .map(WebElement::getText)
                 .collect(Collectors.toList());
     }
 
+    @Step("Получить список цен всех товаров на странице")
     public List<Double> getProductPrices() {
         return driver.findElements(By.className("inventory_item_price"))
                 .stream()
