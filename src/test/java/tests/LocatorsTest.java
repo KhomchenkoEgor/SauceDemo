@@ -1,11 +1,18 @@
 package tests;
 
+import io.qameta.allure.*;
 import org.openqa.selenium.By;
 import org.testng.annotations.Test;
 
 public class LocatorsTest extends BaseTest {
 
+    @Epic("Sauce Demo 2")
+    @Feature("Техническая проверка локаторов")
+    @Owner("Khomchenko E.S.")
+
     @Test
+    @Story("Проверка локаторов элементов")
+    @Severity(SeverityLevel.TRIVIAL)
     public void checkLocators() {
 
         driver.get("https://www.saucedemo.com/");

@@ -1,5 +1,6 @@
 package pages;
 
+import io.qameta.allure.Step;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
@@ -18,6 +19,7 @@ public class CheckoutPage extends BasePage {
         super(driver);
     }
 
+    @Step("Заполнить данные для оформления заказа: Имя='{firstName}', Фамилия='{lastName}', Почтовый индекс='{zipPostalCode}'")
     public void checkout(String firstName, String lastName, String zipPostalCode) {
         driver.findElement(FIRST_NAME_FIELD).sendKeys(firstName);
         driver.findElement(LAST_NAME_FIELD).sendKeys(lastName);

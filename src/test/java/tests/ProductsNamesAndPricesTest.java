@@ -1,5 +1,6 @@
 package tests;
 
+import io.qameta.allure.*;
 import org.testng.Assert;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
@@ -8,6 +9,10 @@ import org.testng.asserts.SoftAssert;
 import static org.testng.Assert.assertEquals;
 
 public class ProductsNamesAndPricesTest extends BaseTest {
+
+    @Epic("Sauce Demo 2")
+    @Feature("Каталог и цены")
+    @Owner("Khomchenko E.S.")
 
     @DataProvider(name = "productAndPrice")
     public Object[][] getData() {
@@ -22,6 +27,8 @@ public class ProductsNamesAndPricesTest extends BaseTest {
             description = "Проверка соответствия цен конкретных товаров после добавления в корзину",
             groups = {"regression"},
             dataProvider = "productAndPrice")
+    @Story("Проверка метаданных товаров в корзине")
+    @Severity(SeverityLevel.NORMAL)
     public void testProductsAndPrice(String name, String price) {
         SoftAssert softAssert = new SoftAssert();
         loginPage.open();

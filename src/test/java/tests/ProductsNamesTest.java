@@ -1,5 +1,6 @@
 package tests;
 
+import io.qameta.allure.*;
 import org.testng.Assert;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
@@ -7,6 +8,10 @@ import org.testng.annotations.Test;
 import static org.testng.Assert.assertEquals;
 
 public class ProductsNamesTest extends BaseTest {
+
+    @Epic("Sauce Demo 2")
+    @Feature("Каталог и цены")
+    @Owner("Khomchenko E.S.")
 
     @DataProvider(name = "productsData")
     public Object[][] getProducts() {
@@ -22,6 +27,8 @@ public class ProductsNamesTest extends BaseTest {
             description = "Проверка корректного отображения имени каждого товара в корзине",
             groups = {"regression"},
             dataProvider = "productsData")
+    @Story("Проверка метаданных товаров в корзине")
+    @Severity(SeverityLevel.NORMAL)
     public void checkEachProduct(String productName) {
         loginPage.open();
         loginPage.login("standard_user", "secret_sauce");
