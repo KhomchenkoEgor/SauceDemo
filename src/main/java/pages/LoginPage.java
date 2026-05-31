@@ -16,21 +16,26 @@ public class LoginPage extends BasePage {
         super(driver);
     }
 
-    @Step("Открытие страницы LoginPage")
-    public void open() {
-        driver.get(BASE_URL);
+    @Override
+    @Step("Ожидание открытия LoginPage")
+    public LoginPage isPageOpened() {
+        wait.until(ExpectedConditions.visibilityOfElementLocated(LOGIN_BUTTON));
+        return this;
     }
 
-    @Step("Страница LoginPage открыта")
-    public void isPageOpened() {
-        wait.until(ExpectedConditions.visibilityOfElementLocated(LOGIN_BUTTON));
+    @Override
+    @Step("Открытие страницы LoginPage")
+    public LoginPage openPage() {
+        driver.get(BASE_URL);
+        return this;
     }
 
     @Step("Вход в систему с именем пользователя: '{user}' и паролем '{password}'")
-    public void login(String user, String password) {
+    public ProductsPage login(String user, String password) {
         driver.findElement(USERNAME_FIELD).sendKeys(user);
         driver.findElement(PASSWORD_FIELD).sendKeys(password);
         driver.findElement(LOGIN_BUTTON).click();
+        return new ProductsPage(driver);
     }
 
     public String getErrorMessage() {

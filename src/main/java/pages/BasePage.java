@@ -10,15 +10,15 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.time.Duration;
 
-public class BasePage {
+public abstract class BasePage {
 
-    WebDriver driver;
-    WebDriverWait wait;
+    protected WebDriver driver;
+    protected WebDriverWait wait;
     public final String BASE_URL = "https://www.saucedemo.com/";
 
     public BasePage(WebDriver driver) {
         this.driver = driver;
-        wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        this.wait = new WebDriverWait(driver, Duration.ofSeconds(10));
     }
 
     public void jSclick(By locator) {
@@ -33,5 +33,8 @@ public class BasePage {
                 return ((JavascriptExecutor) driver)
                         .executeScript("return document.readyState")
                         .toString().equals("complete");        }
-        }; }
+        };
+    }
+    public abstract BasePage isPageOpened();
+    public abstract BasePage openPage();
 }

@@ -25,8 +25,8 @@ public class LoginTest extends BaseTest {
     @TmsLink("SD-T01")
     @Issue("BUG-01")
     public void checkLoginWithPositiveCred() {
-        loginPage.open();
-        loginPage.login("standard_user", "secret_sauce");
+        loginPage.openPage()
+                .login("standard_user", "secret_sauce");
         assertEquals(productsPage.getTitle(), "Products", "SO BAD");
     }
 
@@ -38,8 +38,8 @@ public class LoginTest extends BaseTest {
     @Story("Валидация полей формы авторизации при незаполненном поле Username")
     @Severity(SeverityLevel.NORMAL)
     public void checkLoginWithEmptyUserName() {
-        loginPage.open();
-        loginPage.login("", "secret_sauce");
+        loginPage.openPage()
+                .login("", "secret_sauce");
         assertEquals(loginPage.getErrorMessage(), "Epic sadface: Username is required", "SO BAD");
     }
 
@@ -51,8 +51,8 @@ public class LoginTest extends BaseTest {
     @Story("Валидация полей формы авторизации при незаполненном поле Password")
     @Severity(SeverityLevel.NORMAL)
     public void checkLoginWithEmptyPassword() {
-        loginPage.open();
-        loginPage.login("standard_user", "");
+        loginPage.openPage()
+                .login("standard_user", "");
         assertEquals(loginPage.getErrorMessage(), "Epic sadface: Password is required", "SO BAD");
     }
 
@@ -64,8 +64,8 @@ public class LoginTest extends BaseTest {
     @Story("Валидация полей формы авторизации при вводе несуществующего пользователя")
     @Severity(SeverityLevel.NORMAL)
     public void checkLoginWithNegativeCred() {
-        loginPage.open();
-        loginPage.login("test", "test");
+        loginPage.openPage()
+                .login("test", "test");
         assertEquals(loginPage.getErrorMessage(), "Epic sadface: Username and password do not match any user in this service", "SO BAD");
     }
 
@@ -87,8 +87,8 @@ public class LoginTest extends BaseTest {
     @Story("Валидация полей формы авторизации различными комбинациями невалидных данных через DataProvider")
     @Severity(SeverityLevel.NORMAL)
     public void checkLoginWithNegativeCred1(String user, String password, String errorMessage) {
-        loginPage.open();
-        loginPage.login(user, password);
+        loginPage.openPage()
+                .login(user, password);
         assertEquals(loginPage.getErrorMessage(), errorMessage, "SO BAD");
     }
 }

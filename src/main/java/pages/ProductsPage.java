@@ -4,6 +4,7 @@ import io.qameta.allure.Step;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 
 import java.util.List;
@@ -26,17 +27,27 @@ public class ProductsPage extends BasePage {
         super(driver);
     }
 
-    public void open() {
-        driver.get(BASE_URL + "/inventory.html");
+    @Override
+    @Step("Ожидание открытия ProductsPage")
+    public ProductsPage isPageOpened() {
+        wait.until(ExpectedConditions.visibilityOfElementLocated(TITLE_PRODUCTS));
+        return this;
     }
 
+    @Override
+    @Step("Открыть ProductsPage")
+    public ProductsPage openPage() {
+        driver.get(BASE_URL + "/inventory.html");
+        return isPageOpened();
+    }
     public String getTitle() {
         return driver.findElement(TITLE_PRODUCTS).getText();
     }
 
     @Step("Добавление в корзину товара с именем: '{product}'")
-    public void addToCart(String product) {
+    public ProductsPage addToCart(String product) {
         driver.findElement(By.xpath(String.format(ADD_TO_CART_PATTERN, product))).click();
+        return this;
     }
 
     public String getProductName(String productName) {
@@ -48,14 +59,17 @@ public class ProductsPage extends BasePage {
         return driver.findElement(By.xpath(String.format(PRODUCT_PRICE_PATTERN, productName))).getText();
     }
 
-    public void clickCart() {
+    @Step("Переход в корзину")
+    public CartPage clickCart() {
         driver.findElement(CART).click();
+        return new CartPage(driver).isPageOpened();
     }
 
     @Step("Выбрать опцию сортировки товаров в каталоге: '{value}'")
-    public void selectSortOption(String value) {
+    public ProductsPage selectSortOption(String value) {
         Select dropdown = new Select(driver.findElement(SORT_DROPDOWN));
         dropdown.selectByValue(value);
+        return this;
     }
 
     @Step("Получить список имен всех товаров на странице")

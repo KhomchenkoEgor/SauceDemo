@@ -30,10 +30,10 @@ public class ProductsNamesTest extends BaseTest {
     @Story("Проверка метаданных товаров в корзине")
     @Severity(SeverityLevel.NORMAL)
     public void checkEachProduct(String productName) {
-        loginPage.open();
-        loginPage.login("standard_user", "secret_sauce");
-        productsPage.addToCart(productName);
-        productsPage.clickCart();
+        loginPage.openPage()
+                .login("standard_user", "secret_sauce")
+                .addToCart(productName)
+                .clickCart();
         String actualName = productsPage.getProductName(productName);
         assertEquals(actualName, productName, "Товар не найден в корзине!");
     }
