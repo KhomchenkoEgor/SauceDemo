@@ -31,10 +31,10 @@ public class ProductsNamesAndPricesTest extends BaseTest {
     @Severity(SeverityLevel.NORMAL)
     public void testProductsAndPrice(String name, String price) {
         SoftAssert softAssert = new SoftAssert();
-        loginPage.open();
-        loginPage.login("standard_user", "secret_sauce");
-        productsPage.addToCart(name);
-        productsPage.clickCart();
+        loginPage.openPage()
+                .login("standard_user", "secret_sauce")
+                .addToCart(name)
+                .clickCart();
         String actualName = productsPage.getProductName(name);
         softAssert.assertEquals(actualName, name, "Товар не найден в корзине!");
         String actualPrice = productsPage.getProductPrice(name);

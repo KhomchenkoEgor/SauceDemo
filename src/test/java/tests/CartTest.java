@@ -6,6 +6,7 @@ import org.testng.Assert;
 import org.testng.annotations.Test;
 
 import static org.testng.Assert.assertEquals;
+import static org.testng.Assert.assertTrue;
 
 
 public class CartTest extends BaseTest {
@@ -26,11 +27,15 @@ public class CartTest extends BaseTest {
     @Issue("BUG-02")
     public void checkCart() {
 
-        loginPage.open();
-        loginPage.login("standard_user", "secret_sauce");
-        productsPage.addToCart("Sauce Labs Backpack");
-        productsPage.addToCart("Test.allTheThings() T-Shirt (Red)");
-        productsPage.clickCart();
-        assertEquals(cartPage.getTitle(), "Your Cart", "OK");
+        loginPage.openPage()
+                .login("standard_user", "secret_sauce")
+                .isPageOpened()
+                .addToCart("Sauce Labs Backpack")
+                .addToCart("Test.allTheThings() T-Shirt (Red)")
+                .clickCart();
+        assertTrue(cartPage.isProductInCart("Sauce Labs Backpack"), "SO BAAAAAAD");
+        assertEquals(cartPage.getProductNameFromCart(0), "Sauce Labs Backpack", "SO BAAAAAD");
+        assertEquals(cartPage.getProductNameFromCart(1), "Test.allTheThings() T-Shirt (Red)", "SO BAAAAAD");
+        assertTrue(cartPage.getProductsName().contains("Sauce Labs Backpack"), "SO BAAAAAD");
     }
 }

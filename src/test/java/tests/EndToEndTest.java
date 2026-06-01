@@ -17,13 +17,13 @@ public class EndToEndTest extends BaseTest {
     @Story("Покупка товаров через корзину (End-to-End)")
     @Severity(SeverityLevel.CRITICAL)
     public void checkEToETest() {
-        loginPage.open();
-        loginPage.login("standard_user", "secret_sauce");
-        productsPage.clickCart();
-        cartPage.clickCheckout();
-        checkoutPage.checkout("Igor", "Shustov", "1111");
-        checkoutPage.clickContinue();
-        checkoutPage.clickFinish();
+        loginPage.openPage()
+                .login("standard_user", "secret_sauce")
+                .clickCart()
+                .clickCheckout()
+                .checkout("Igor", "Shustov", "1111")
+                .clickContinue()
+                .clickFinish();
         assertEquals(checkoutPage.getCompletedMessage(), expectedCompleteMessage, "Сообщение об успешном заказе не совпадает");
     }
 }

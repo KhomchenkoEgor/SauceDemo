@@ -19,7 +19,7 @@ public class CheckoutTest extends BaseTest {
     @Story("Успешное заполнение формы доставки")
     @Severity(SeverityLevel.CRITICAL)
     public void checkCheckoutWithPositiveCred() {
-        loginPage.open();
+        loginPage.openPage();
         loginPage.login("standard_user", "secret_sauce");
         productsPage.clickCart();
         cartPage.clickCheckout();
@@ -35,7 +35,7 @@ public class CheckoutTest extends BaseTest {
     @Story("Валидация обязательных полей при отправке пустой формы")
     @Severity(SeverityLevel.NORMAL)
     public void checkCheckoutWithEmptyFields() {
-        loginPage.open();
+        loginPage.openPage();
         loginPage.login("standard_user", "secret_sauce");
         productsPage.clickCart();
         cartPage.clickCheckout();
@@ -51,7 +51,7 @@ public class CheckoutTest extends BaseTest {
     @Story("Валидация обязательных полей при отсутствии фамилии")
     @Severity(SeverityLevel.NORMAL)
     public void checkLoginWithEmptyLastName() {
-        loginPage.open();
+        loginPage.openPage();
         loginPage.login("standard_user", "secret_sauce");
         productsPage.clickCart();
         cartPage.clickCheckout();
@@ -67,7 +67,7 @@ public class CheckoutTest extends BaseTest {
     @Story("Валидация обязательных полей при отсутствии почтового индекса")
     @Severity(SeverityLevel.NORMAL)
     public void checkCheckoutWithEmptyZipCode() {
-        loginPage.open();
+        loginPage.openPage();
         loginPage.login("standard_user", "secret_sauce");
         productsPage.clickCart();
         cartPage.clickCheckout();
