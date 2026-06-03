@@ -38,12 +38,12 @@ public class LoginPage extends BasePage {
     }
 
     @Step("Вход в систему с именем пользователя: '{user}' и паролем '{password}'")
-    public LoginPage login(String user, String password) {
+    public ProductsPage login(String user, String password) {
         log.info("Попытка входа под пользователем: {}", user);
         driver.findElement(USERNAME_FIELD).sendKeys(user);
         driver.findElement(PASSWORD_FIELD).sendKeys(password);
         driver.findElement(LOGIN_BUTTON).click();
-        return this;
+        return new ProductsPage(driver);
     }
 
 //    public String getErrorMessage() {
