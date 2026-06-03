@@ -1,12 +1,14 @@
 package tests;
 
 import io.qameta.allure.*;
+import lombok.extern.log4j.Log4j2;
 import org.testng.Assert;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
 import static org.testng.Assert.assertEquals;
 
+@Log4j2
 public class ProductsNamesTest extends BaseTest {
 
     @Epic("Sauce Demo 2")
@@ -30,8 +32,10 @@ public class ProductsNamesTest extends BaseTest {
     @Story("Проверка метаданных товаров в корзине")
     @Severity(SeverityLevel.NORMAL)
     public void checkEachProduct(String productName) {
+        log.info("Тест: Проверка имени товара в корзине для [{}]", productName);
         loginPage.openPage()
                 .login("standard_user", "secret_sauce")
+                .isPageOpened()
                 .addToCart(productName)
                 .clickCart();
         String actualName = productsPage.getProductName(productName);

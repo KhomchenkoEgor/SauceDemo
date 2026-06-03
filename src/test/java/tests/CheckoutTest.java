@@ -1,11 +1,14 @@
 package tests;
 
+import dto.Customer;
 import io.qameta.allure.*;
-import org.testng.Assert;
+import lombok.Data;
+import lombok.extern.log4j.Log4j2;
 import org.testng.annotations.Test;
 
 import static org.testng.Assert.assertEquals;
 
+@Log4j2
 public class CheckoutTest extends BaseTest {
 
     @Epic("Sauce Demo 2")
@@ -19,13 +22,19 @@ public class CheckoutTest extends BaseTest {
     @Story("Успешное заполнение формы доставки")
     @Severity(SeverityLevel.CRITICAL)
     public void checkCheckoutWithPositiveCred() {
-        loginPage.openPage();
-        loginPage.login("standard_user", "secret_sauce");
-        productsPage.clickCart();
-        cartPage.clickCheckout();
-        checkoutPage.checkout("Igor", "Shustov", "111");
-        checkoutPage.clickContinue();
-        assertEquals(checkoutPage.getTitle(), "Checkout: Overview", "OK");
+        log.info("Тест: Заполнение валидных данных доставки на первом шаге Checkout");
+        Customer customer = new Customer("Igor", "Shustov", "111");
+
+        loginPage.openPage()
+                .login("standard_user", "secret_sauce");
+
+        productsPage.isPageOpened()
+                .clickCart()
+                .clickCheckout()
+                .checkout(customer)
+                .clickContinue();
+
+        assertEquals(checkoutPage.getTitle(), "Checkout: Overview", "Переход ко второму шагу не выполнен!");
     }
 
     @Test(
@@ -35,12 +44,17 @@ public class CheckoutTest extends BaseTest {
     @Story("Валидация обязательных полей при отправке пустой формы")
     @Severity(SeverityLevel.NORMAL)
     public void checkCheckoutWithEmptyFields() {
-        loginPage.openPage();
-        loginPage.login("standard_user", "secret_sauce");
-        productsPage.clickCart();
-        cartPage.clickCheckout();
-        checkoutPage.checkout("", "", "");
-        checkoutPage.clickContinue();
+        log.info("Тест: Попытка отправить пустую форму Checkout");
+        Customer customer = new Customer("", "", "");
+
+        loginPage.openPage()
+                .login("standard_user", "secret_sauce");
+
+        productsPage.isPageOpened()
+                .clickCart()
+                .clickCheckout()
+                .checkout(customer)
+                .clickContinue();
         assertEquals(checkoutPage.getErrorMessage(), "Error: First Name is required", "SO BAD");
     }
 
@@ -51,12 +65,17 @@ public class CheckoutTest extends BaseTest {
     @Story("Валидация обязательных полей при отсутствии фамилии")
     @Severity(SeverityLevel.NORMAL)
     public void checkLoginWithEmptyLastName() {
-        loginPage.openPage();
-        loginPage.login("standard_user", "secret_sauce");
-        productsPage.clickCart();
-        cartPage.clickCheckout();
-        checkoutPage.checkout("111", "", "111");
-        checkoutPage.clickContinue();
+        log.info("Тест: Оформление заказа с отсутствующей фамилией");
+        Customer customer = new Customer("111", "", "111");
+
+        loginPage.openPage()
+                .login("standard_user", "secret_sauce");
+
+        productsPage.isPageOpened()
+                .clickCart()
+                .clickCheckout()
+                .checkout(customer)
+                .clickContinue();
         assertEquals(checkoutPage.getErrorMessage(), "Error: Last Name is required", "SO BAD");
     }
 
@@ -67,12 +86,16 @@ public class CheckoutTest extends BaseTest {
     @Story("Валидация обязательных полей при отсутствии почтового индекса")
     @Severity(SeverityLevel.NORMAL)
     public void checkCheckoutWithEmptyZipCode() {
-        loginPage.openPage();
-        loginPage.login("standard_user", "secret_sauce");
-        productsPage.clickCart();
-        cartPage.clickCheckout();
-        checkoutPage.checkout("test", "test", "");
-        checkoutPage.clickContinue();
+        log.info("Тест: Оформление заказа с отсутствующим почтовым кодом");
+        Customer customer = new Customer("test", "test", "");
+
+        loginPage.openPage()
+                .login("standard_user", "secret_sauce")
+                .isPageOpened()
+                .clickCart()
+                .clickCheckout()
+                .checkout(customer)
+                .clickContinue();
         assertEquals(checkoutPage.getErrorMessage(), "Error: Postal Code is required", "SO BAD");
     }
 }

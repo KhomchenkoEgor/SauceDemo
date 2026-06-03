@@ -1,6 +1,7 @@
 package tests;
 
 import io.qameta.allure.*;
+import lombok.extern.log4j.Log4j2;
 import org.testng.Assert;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
@@ -8,6 +9,7 @@ import org.testng.asserts.SoftAssert;
 
 import static org.testng.Assert.assertEquals;
 
+@Log4j2
 public class ProductsNamesAndPricesTest extends BaseTest {
 
     @Epic("Sauce Demo 2")
@@ -30,11 +32,15 @@ public class ProductsNamesAndPricesTest extends BaseTest {
     @Story("Проверка метаданных товаров в корзине")
     @Severity(SeverityLevel.NORMAL)
     public void testProductsAndPrice(String name, String price) {
+        log.info("Тест: Проверка соответствия цены товара [{}] значению [{}]", name, price);
         SoftAssert softAssert = new SoftAssert();
         loginPage.openPage()
-                .login("standard_user", "secret_sauce")
-                .addToCart(name)
-                .clickCart();
+                .login("standard_user", "secret_sauce");
+
+        productsPage.isPageOpened()
+                .addToCart(name);
+
+        productsPage.clickCart();
         String actualName = productsPage.getProductName(name);
         softAssert.assertEquals(actualName, name, "Товар не найден в корзине!");
         String actualPrice = productsPage.getProductPrice(name);

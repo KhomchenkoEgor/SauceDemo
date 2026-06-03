@@ -2,11 +2,13 @@ package tests;
 
 
 import io.qameta.allure.*;
+import lombok.extern.log4j.Log4j2;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
 import static org.testng.Assert.assertEquals;
 
+@Log4j2
 public class LoginTest extends BaseTest {
 
     @Test(
@@ -25,8 +27,10 @@ public class LoginTest extends BaseTest {
     @TmsLink("SD-T01")
     @Issue("BUG-01")
     public void checkLoginWithPositiveCred() {
+        log.info("Тест: Успешная авторизация standard_user");
         loginPage.openPage()
                 .login("standard_user", "secret_sauce");
+        productsPage.isPageOpened();
         assertEquals(productsPage.getTitle(), "Products", "SO BAD");
     }
 
@@ -38,6 +42,7 @@ public class LoginTest extends BaseTest {
     @Story("Валидация полей формы авторизации при незаполненном поле Username")
     @Severity(SeverityLevel.NORMAL)
     public void checkLoginWithEmptyUserName() {
+        log.info("Тест: Авторизация с пустой строкой вместо логина");
         loginPage.openPage()
                 .login("", "secret_sauce");
         assertEquals(loginPage.getErrorMessage(), "Epic sadface: Username is required", "SO BAD");
@@ -51,6 +56,7 @@ public class LoginTest extends BaseTest {
     @Story("Валидация полей формы авторизации при незаполненном поле Password")
     @Severity(SeverityLevel.NORMAL)
     public void checkLoginWithEmptyPassword() {
+        log.info("Тест: Авторизация с пустым полем пароля");
         loginPage.openPage()
                 .login("standard_user", "");
         assertEquals(loginPage.getErrorMessage(), "Epic sadface: Password is required", "SO BAD");
@@ -64,6 +70,7 @@ public class LoginTest extends BaseTest {
     @Story("Валидация полей формы авторизации при вводе несуществующего пользователя")
     @Severity(SeverityLevel.NORMAL)
     public void checkLoginWithNegativeCred() {
+        log.info("Тест: Авторизация под несуществующим пользователем");
         loginPage.openPage()
                 .login("test", "test");
         assertEquals(loginPage.getErrorMessage(), "Epic sadface: Username and password do not match any user in this service", "SO BAD");
@@ -87,6 +94,7 @@ public class LoginTest extends BaseTest {
     @Story("Валидация полей формы авторизации различными комбинациями невалидных данных через DataProvider")
     @Severity(SeverityLevel.NORMAL)
     public void checkLoginWithNegativeCred1(String user, String password, String errorMessage) {
+        log.info("Параметризованный тест авторизации для пользователя: {}", user);
         loginPage.openPage()
                 .login(user, password);
         assertEquals(loginPage.getErrorMessage(), errorMessage, "SO BAD");

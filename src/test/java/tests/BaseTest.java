@@ -3,6 +3,9 @@ package tests;
 import io.qameta.allure.Step;
 import io.qameta.allure.testng.AllureTestNg;
 import listners.TestListener;
+import lombok.AccessLevel;
+import lombok.experimental.FieldDefaults;
+import lombok.extern.log4j.Log4j2;
 import org.openqa.selenium.WebDriver;
 
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -20,6 +23,8 @@ import pages.ProductsPage;
 import java.time.Duration;
 import java.util.HashMap;
 
+@Log4j2
+@FieldDefaults(level = AccessLevel.PROTECTED)
 @Listeners({AllureTestNg.class, TestListener.class})
 public class BaseTest {
 

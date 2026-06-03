@@ -1,14 +1,14 @@
 package tests;
 
 import io.qameta.allure.*;
-import org.testng.Assert;
+import lombok.extern.log4j.Log4j2;
 
 import org.testng.annotations.Test;
 
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertTrue;
 
-
+@Log4j2
 public class CartTest extends BaseTest {
 
     @Test(
@@ -26,7 +26,7 @@ public class CartTest extends BaseTest {
     @TmsLink("SD-T02")
     @Issue("BUG-02")
     public void checkCart() {
-
+        log.info("Тест: Добавление товаров в корзину и проверка их наличия");
         loginPage.openPage()
                 .login("standard_user", "secret_sauce")
                 .isPageOpened()

@@ -2,6 +2,7 @@ package tests;
 
 
 import io.qameta.allure.*;
+import lombok.extern.log4j.Log4j2;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
@@ -11,6 +12,7 @@ import java.util.List;
 
 import static org.testng.Assert.assertEquals;
 
+@Log4j2
 public class ProductSortTest extends BaseTest {
 
     @Epic("Sauce Demo 2")
@@ -23,6 +25,7 @@ public class ProductSortTest extends BaseTest {
     @Story("Сортировка товаров в каталоге")
     @Severity(SeverityLevel.NORMAL)
     public void checkSortZA() {
+        log.info("Тест: Алфавитная сортировка товаров Z-A");
         loginPage.openPage()
                 .login("standard_user", "secret_sauce")
                 .selectSortOption("za");
@@ -39,6 +42,7 @@ public class ProductSortTest extends BaseTest {
     @Story("Сортировка товаров в каталоге")
     @Severity(SeverityLevel.NORMAL)
     public void checkPriceSortLowToHigh() {
+        log.info("Тест: Сортировка стоимости товаров Low to High");
         loginPage.openPage()
                 .login("standard_user", "secret_sauce")
                 .selectSortOption("lohi");

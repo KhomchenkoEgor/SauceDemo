@@ -1,6 +1,9 @@
 package pages;
 
 import io.qameta.allure.Step;
+import lombok.AccessLevel;
+import lombok.experimental.FieldDefaults;
+import lombok.extern.log4j.Log4j2;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -9,10 +12,12 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import java.util.ArrayList;
 import java.util.List;
 
+@Log4j2
+@FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
 public class CartPage extends BasePage {
 
-    private final By TITLE_CART = By.cssSelector("[data-test = title]");
-    private final By CHECKOUT = By.cssSelector("[data-test = checkout]");
+    By TITLE_CART = By.cssSelector("[data-test = title]");
+    By CHECKOUT = By.cssSelector("[data-test = checkout]");
 
     public CartPage(WebDriver driver) {
         super(driver);
@@ -21,6 +26,7 @@ public class CartPage extends BasePage {
     @Override
     @Step("Ожидание открытия CartPage")
     public CartPage isPageOpened() {
+        log.info("Ожидание загрузки страницы корзины");
         wait.until(ExpectedConditions.visibilityOfElementLocated(TITLE_CART));
         return this;
     }
@@ -28,6 +34,7 @@ public class CartPage extends BasePage {
     @Override
     @Step("Открыть CartPage")
     public CartPage openPage() {
+        log.info("Переход на страницу корзины по URL");
         driver.get(BASE_URL + "/cart.html");
         return isPageOpened();
     }
@@ -38,8 +45,9 @@ public class CartPage extends BasePage {
 
     @Step("Переход к Checkout")
     public CheckoutPage clickCheckout() {
+        log.info("Клик по кнопке оформления заказа Checkout");
         driver.findElement(CHECKOUT).click();
-        return new CheckoutPage(driver).isPageOpened(); // Цепочка на CheckoutPage
+        return new CheckoutPage(driver).isPageOpened();
     }
 
     public boolean isProductInCart(String product) {
@@ -62,6 +70,7 @@ public class CartPage extends BasePage {
     }
 
     public void clickProduct(String name) {
+        log.info("Переход на карточку товара из корзины по имени: {}", name);
         List<WebElement> products = driver.findElements(By.cssSelector(".inventory_item_name"));
         for (WebElement product: products) {
             if (product.getText().contains(name)){
