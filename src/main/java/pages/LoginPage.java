@@ -38,17 +38,20 @@ public class LoginPage extends BasePage {
     }
 
     @Step("Вход в систему с именем пользователя: '{user}' и паролем '{password}'")
-    public ProductsPage login(String user, String password) {
+    public LoginPage login(String user, String password) {
         log.info("Попытка входа под пользователем: {}", user);
         driver.findElement(USERNAME_FIELD).sendKeys(user);
         driver.findElement(PASSWORD_FIELD).sendKeys(password);
         driver.findElement(LOGIN_BUTTON).click();
-        return new ProductsPage(driver).isPageOpened();
+        return this;
     }
 
+//    public String getErrorMessage() {
+//        String errorText = driver.findElement(ERROR_MESSAGE).getText();
+//        log.warn("Получена ошибка валидации при логине: {}", errorText);
+//        return errorText;
+//    }
     public String getErrorMessage() {
-        String errorText = driver.findElement(ERROR_MESSAGE).getText();
-        log.warn("Получена ошибка валидации при логине: {}", errorText);
-        return errorText;
+        return driver.findElement(ERROR_MESSAGE).getText();
     }
 }

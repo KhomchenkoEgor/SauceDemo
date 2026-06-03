@@ -73,6 +73,7 @@ public class LoginTest extends BaseTest {
         log.info("Тест: Авторизация под несуществующим пользователем");
         loginPage.openPage()
                 .login("test", "test");
+
         assertEquals(loginPage.getErrorMessage(), "Epic sadface: Username and password do not match any user in this service", "SO BAD");
     }
 
