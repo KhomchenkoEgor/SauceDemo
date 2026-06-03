@@ -28,8 +28,8 @@ public class EndToEndTest extends BaseTest {
 
         loginPage.openPage()
                 .login("standard_user", "secret_sauce")
-                .isPageOpened()
-                .addToCart("Sauce Labs Backpack")
+                .isPageOpened();
+        productsPage.addToCart("Sauce Labs Backpack")
                 .clickCart()
                 .clickCheckout()
                 .checkout(customer)

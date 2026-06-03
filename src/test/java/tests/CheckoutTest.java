@@ -91,8 +91,8 @@ public class CheckoutTest extends BaseTest {
 
         loginPage.openPage()
                 .login("standard_user", "secret_sauce")
-                .isPageOpened()
-                .clickCart()
+                .isPageOpened();
+        productsPage.clickCart()
                 .clickCheckout()
                 .checkout(customer)
                 .clickContinue();

@@ -35,8 +35,8 @@ public class ProductsNamesTest extends BaseTest {
         log.info("Тест: Проверка имени товара в корзине для [{}]", productName);
         loginPage.openPage()
                 .login("standard_user", "secret_sauce")
-                .isPageOpened()
-                .addToCart(productName)
+                .isPageOpened();
+        productsPage.addToCart(productName)
                 .clickCart();
         String actualName = productsPage.getProductName(productName);
         assertEquals(actualName, productName, "Товар не найден в корзине!");
