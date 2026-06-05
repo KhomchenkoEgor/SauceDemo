@@ -50,7 +50,7 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
     needs: build
-    if: always()
+    if: success() || always()
     steps:
       # Шаг 4: Официальный деплой на серверы GitHub Pages
       - name: Deploy to GitHub Pages
