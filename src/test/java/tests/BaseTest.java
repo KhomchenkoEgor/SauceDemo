@@ -55,12 +55,12 @@ public class BaseTest {
             driver = new ChromeDriver(options);
             driver.manage().window().maximize();
         } else if (browser.equalsIgnoreCase("firefox")) {
-            driver = new FirefoxDriver();
             FirefoxOptions options = new FirefoxOptions();
+            driver = new FirefoxDriver();
             options.addArguments("--headless");
         } else if (browser.equalsIgnoreCase("edge")) {
-            driver = new EdgeDriver();
             EdgeOptions options = new EdgeOptions();
+            driver = new EdgeDriver();
             options.addArguments("--headless");
         }
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));

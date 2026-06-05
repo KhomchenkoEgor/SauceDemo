@@ -35,12 +35,12 @@ public class ProductsNamesAndPricesTest extends BaseTest {
         log.info("Тест: Проверка соответствия цены товара [{}] значению [{}]", name, price);
         SoftAssert softAssert = new SoftAssert();
         loginPage.openPage()
-                .login("standard_user", "secret_sauce");
+                .login("standard_user", "secret_sauce")
 
-        productsPage.isPageOpened()
-                .addToCart(name);
+                .isPageOpened()
+                .addToCart(name)
 
-        productsPage.clickCart();
+                .clickCart();
         String actualName = productsPage.getProductName(name);
         softAssert.assertEquals(actualName, name, "Товар не найден в корзине!");
         String actualPrice = productsPage.getProductPrice(name);

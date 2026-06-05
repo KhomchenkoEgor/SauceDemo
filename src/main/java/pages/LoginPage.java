@@ -34,7 +34,7 @@ public class LoginPage extends BasePage {
     public LoginPage openPage() {
         log.info("Открытие страницы: {}", BASE_URL);
         driver.get(BASE_URL);
-        return this;
+        return isPageOpened();
     }
 
     @Step("Вход в систему с именем пользователя: '{user}' и паролем '{password}'")
@@ -46,12 +46,13 @@ public class LoginPage extends BasePage {
         return new ProductsPage(driver);
     }
 
-//    public String getErrorMessage() {
+    //    public String getErrorMessage() {
 //        String errorText = driver.findElement(ERROR_MESSAGE).getText();
 //        log.warn("Получена ошибка валидации при логине: {}", errorText);
 //        return errorText;
 //    }
     public String getErrorMessage() {
+        log.warn("Получена ошибка валидации при логине");
         return driver.findElement(ERROR_MESSAGE).getText();
     }
 }

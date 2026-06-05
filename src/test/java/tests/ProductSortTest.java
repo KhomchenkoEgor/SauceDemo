@@ -27,8 +27,8 @@ public class ProductSortTest extends BaseTest {
     public void checkSortZA() {
         log.info("Тест: Алфавитная сортировка товаров Z-A");
         loginPage.openPage()
-                .login("standard_user", "secret_sauce");
-        productsPage.selectSortOption("za");
+                .login("standard_user", "secret_sauce")
+                .selectSortOption("za");
         List<String> actualNames = productsPage.getProductNames();
         List<String> expectedNames = new ArrayList<>(actualNames);
         expectedNames.sort(Collections.reverseOrder());
@@ -44,8 +44,8 @@ public class ProductSortTest extends BaseTest {
     public void checkPriceSortLowToHigh() {
         log.info("Тест: Сортировка стоимости товаров Low to High");
         loginPage.openPage()
-                .login("standard_user", "secret_sauce");
-        productsPage.selectSortOption("lohi");
+                .login("standard_user", "secret_sauce")
+                .selectSortOption("lohi");
         List<Double> actualPrices = productsPage.getProductPrices();
         List<Double> expectedPrices = new ArrayList<>(actualPrices);
         Collections.sort(expectedPrices);

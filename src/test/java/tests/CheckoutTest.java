@@ -69,9 +69,8 @@ public class CheckoutTest extends BaseTest {
         Customer customer = new Customer("111", "", "111");
 
         loginPage.openPage()
-                .login("standard_user", "secret_sauce");
-
-        productsPage.isPageOpened()
+                .login("standard_user", "secret_sauce")
+                .isPageOpened()
                 .clickCart()
                 .clickCheckout()
                 .checkout(customer)
@@ -91,8 +90,8 @@ public class CheckoutTest extends BaseTest {
 
         loginPage.openPage()
                 .login("standard_user", "secret_sauce")
-                .isPageOpened();
-        productsPage.clickCart()
+                .isPageOpened()
+                .clickCart()
                 .clickCheckout()
                 .checkout(customer)
                 .clickContinue();
