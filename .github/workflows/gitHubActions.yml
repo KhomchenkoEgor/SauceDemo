@@ -41,11 +41,11 @@ jobs:
         continue-on-error: true
         with:
           ref: gh-pages
-          path: gh-pages-history
+          path: gh-pages
 
       # Генерируем новый отчет из сырых результатов target/allure-results
       - name: Generate Allure Report
-        uses: simple-elf/allure-report-action@v1.9
+        uses: simple-elf/allure-report-action@master
         if: always()
         with:
           allure_results: target/allure-results
@@ -61,5 +61,5 @@ jobs:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_branch: gh-pages
           publish_dir: ./allure-history
-          force_orphan: true
+          
    
