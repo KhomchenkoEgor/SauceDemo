@@ -85,10 +85,13 @@
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-surefire-plugin</artifactId>
                 <version>3.5.5</version>
-                <configuration>
-                    <!--                    <suiteXmlFiles>-->
-                    <!--                        <suiteXmlFile>${suiteXmlFile}</suiteXmlFile>-->
-                    <!--                    </suiteXmlFiles>-->
+               <configuration>
+                 <!-- ВОТ ЭТОТ БЛОК: он заставит простую команду 'mvn clean test' запускать всё сразу -->
+                 <suiteXmlFiles>
+                     <suiteXmlFile>regression.xml</suiteXmlFile>
+                     <suiteXmlFile>smoke.xml</suiteXmlFile>
+                     <suiteXmlFile>crossbrauser.xml</suiteXmlFile>
+                 </suiteXmlFiles>
                     <argLine>
                         -javaagent:"${settings.localRepository}/org/aspectj/aspectjweaver/${aspectj.version}/aspectjweaver-${aspectj.version}.jar"
                     </argLine>
