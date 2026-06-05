@@ -36,10 +36,8 @@ public class ProductsNamesAndPricesTest extends BaseTest {
         SoftAssert softAssert = new SoftAssert();
         loginPage.openPage()
                 .login("standard_user", "secret_sauce")
-
                 .isPageOpened()
                 .addToCart(name)
-
                 .clickCart();
         String actualName = productsPage.getProductName(name);
         softAssert.assertEquals(actualName, name, "Товар не найден в корзине!");
