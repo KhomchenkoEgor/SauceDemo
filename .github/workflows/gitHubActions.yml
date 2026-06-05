@@ -45,7 +45,7 @@ jobs:
           ref: gh-pages
           path: gh-pages-dir
 
-      # Генерируем новый отчет из сырых результатов target/allure-results
+      # Генерируем новый отчет из сырых результатов 
       - name: Generate Allure Report
         uses: simple-elf/allure-report-action@master
         if: always()
@@ -54,7 +54,7 @@ jobs:
           allure_results: target/allure-results
           allure_history: allure-history
           keep_reports: 20
-          allure_result_history: gh-pages-dir
+          gh_pages: gh-pages-dir
 
       # Публикуем готовую папку на GitHub Pages через peaceiris (работает без артефактов)
       - name: Deploy Report to GitHub Pages
