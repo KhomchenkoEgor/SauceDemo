@@ -31,39 +31,33 @@ jobs:
           java-version: '17'
           distribution: 'temurin'
           cache: maven
-      - name: Run tests
+      - name: Run Tests with Maven
         run: mvn clean test
-
         continue-on-error: true
 
-      - name: Get Allure history
+      - name: Load Allure history
         uses: actions/checkout@v4
-        if: always() # Выполнять шаг всегда, даже если тесты упали
+        if: always()
+        continue-on-error: true
         with:
           ref: gh-pages
-          path: gh-pages
+          path: gh-pages-dir
 
-      - name: Generate Allure Report
+      - name: Build Allure Report
         uses: simple-elf/allure-report-action@v1.9
         if: always()
         with:
           allure_results: target/allure-results
-          allure_history: allure-report
+          allure_report: allure-report
+          gh_pages: gh-pages-dir
+          allure_history: allure-history
 
-      # ОФИЦИАЛЬНЫЙ ШАГ 1: Архивация готового отчета для GitHub Pages
-      - name: Upload Pages Artifact
-        uses: actions/upload-pages-artifact@v3
+      - name: Deploy Allure Report to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v4
         if: always()
         with:
-          path: allure-report  # Указываем папку, где лежит index.html отчета
-
-  deploy:
-    runs-on: ubuntu-latest
-    needs: build
-    if: always()
-    steps:
-      # ОФИЦИАЛЬНЫЙ ШАГ 2: Публикация на сайт без использования Git-коммитов
-      - name: Deploy to GitHub Pages
-        uses: actions/deploy-pages@v4
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_branch: gh-pages
+          publish_dir: allure-history
 
    
