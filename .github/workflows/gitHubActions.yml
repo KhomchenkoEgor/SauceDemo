@@ -49,6 +49,16 @@ jobs:
           allure_history: allure-history
           keep_reports: 20 # Ограничение истории до 20 последних запусков
 
+      - name: Copy index.html to root
+        if: always()
+        run: |
+          if [ -d "gh-pages/allure-history/${{ github.run_number }}" ]; then
+            cp -r gh-pages/allure-history/${{ github.run_number }}/* gh-pages/
+            echo "Файлы отчета успешно скопированы в корень"
+          else
+            echo "Папка с отчетом не найдена"
+          fi
+
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
         if: always() # Выполнять шаг всегда, чтобы увидеть отчет по упавшим тестам
