@@ -34,7 +34,7 @@ public class ProductsNamesTest extends BaseTest {
     public void checkEachProduct(String productName) {
         log.info("Тест: Проверка имени товара в корзине для [{}]", productName);
         loginPage.openPage()
-                .login("standard_user", "secret_sauce")
+                .login(user, password)
                 .isPageOpened()
                 .addToCart(productName)
                 .clickCart();

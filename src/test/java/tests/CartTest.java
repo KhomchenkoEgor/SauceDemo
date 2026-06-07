@@ -28,7 +28,7 @@ public class CartTest extends BaseTest {
     public void checkCart() {
         log.info("Тест: Добавление товаров в корзину и проверка их наличия");
         loginPage.openPage()
-                .login("standard_user", "secret_sauce")
+                .login(user, password)
                 .isPageOpened()
                 .addToCart("Sauce Labs Backpack")
                 .addToCart("Test.allTheThings() T-Shirt (Red)")

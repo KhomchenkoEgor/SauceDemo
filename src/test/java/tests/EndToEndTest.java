@@ -27,7 +27,7 @@ public class EndToEndTest extends BaseTest {
         Customer customer = new Customer("Igor", "Shustov", "1111");
 
         loginPage.openPage()
-                .login("standard_user", "secret_sauce")
+                .login(user, password)
                 .isPageOpened()
                 .addToCart("Sauce Labs Backpack")
                 .clickCart()

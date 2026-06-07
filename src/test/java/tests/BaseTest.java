@@ -20,6 +20,7 @@ import pages.CartPage;
 import pages.CheckoutPage;
 import pages.LoginPage;
 import pages.ProductsPage;
+import utils.PropertyReader;
 
 
 import java.time.Duration;
@@ -35,6 +36,9 @@ public class BaseTest {
     ProductsPage productsPage;
     CheckoutPage checkoutPage;
     CartPage cartPage;
+
+    String user = System.getProperty("user", PropertyReader.getProperty("user"));
+    String password = System.getProperty("password", PropertyReader.getProperty("password"));
 
     @Parameters({"browser"})
     @BeforeMethod(alwaysRun = true)

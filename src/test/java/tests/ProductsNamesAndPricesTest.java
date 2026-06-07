@@ -35,7 +35,7 @@ public class ProductsNamesAndPricesTest extends BaseTest {
         log.info("Тест: Проверка соответствия цены товара [{}] значению [{}]", name, price);
         SoftAssert softAssert = new SoftAssert();
         loginPage.openPage()
-                .login("standard_user", "secret_sauce")
+                .login(user, password)
                 .isPageOpened()
                 .addToCart(name)
                 .clickCart();

@@ -29,7 +29,7 @@ public class LoginTest extends BaseTest {
     public void checkLoginWithPositiveCred() {
         log.info("Тест: Успешная авторизация standard_user");
         loginPage.openPage()
-                .login("standard_user", "secret_sauce");
+                .login(user, password);
         productsPage.isPageOpened();
         assertEquals(productsPage.getTitle(), "Products", "SO BAD");
     }
@@ -44,7 +44,7 @@ public class LoginTest extends BaseTest {
     public void checkLoginWithEmptyUserName() {
         log.info("Тест: Авторизация с пустой строкой вместо логина");
         loginPage.openPage()
-                .login("", "secret_sauce");
+                .login("", password);
         assertEquals(loginPage.getErrorMessage(), "Epic sadface: Username is required", "SO BAD");
     }
 
@@ -58,7 +58,7 @@ public class LoginTest extends BaseTest {
     public void checkLoginWithEmptyPassword() {
         log.info("Тест: Авторизация с пустым полем пароля");
         loginPage.openPage()
-                .login("standard_user", "");
+                .login(user, "");
         assertEquals(loginPage.getErrorMessage(), "Epic sadface: Password is required", "SO BAD");
     }
 
